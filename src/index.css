@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Light theme (default) ── */
+:root {
+  --bg:          #f0f4ff;
+  --bg-card:     rgba(255,255,255,0.75);
+  --bg-card-2:   rgba(255,255,255,0.55);
+  --border:      rgba(99,102,241,0.12);
+  --text:        #4b5563;
+  --text-h:      #111827;
+  --text-muted:  #9ca3af;
+  --accent:      #6366f1;
+  --accent-2:    #818cf8;
+  --accent-glow: rgba(99,102,241,0.18);
+  --danger:      #ef4444;
+  --success:     #10b981;
+  --warn:        #f59e0b;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
+  --shadow:      0 8px 32px rgba(99,102,241,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg:   0 20px 60px rgba(99,102,241,0.14);
+  --radius:      16px;
+  --radius-sm:   10px;
+  --transition:  0.22s cubic-bezier(.4,0,.2,1);
+  --font:        'Outfit', sans-serif;
+  --mono:        'DM Mono', monospace;
+}
+
+/* ── Dark theme ── */
+.dark {
+  --bg:          #0d0f1a;
+  --bg-card:     rgba(255,255,255,0.05);
+  --bg-card-2:   rgba(255,255,255,0.03);
+  --border:      rgba(129,140,248,0.12);
+  --text:        #9ca3af;
+  --text-h:      #f9fafb;
+  --text-muted:  #6b7280;
+  --accent:      #818cf8;
+  --accent-2:    #a5b4fc;
+  --accent-glow: rgba(129,140,248,0.20);
+  --danger:      #f87171;
+  --success:     #34d399;
+  --warn:        #fbbf24;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.4);
+  --shadow:      0 8px 32px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-lg:   0 20px 60px rgba(0,0,0,0.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Background gradient orbs ── */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity var(--transition);
+}
+body::before {
+  width: 600px; height: 600px;
+  top: -200px; left: -200px;
+  background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+}
+body::after {
+  width: 500px; height: 500px;
+  bottom: -100px; right: -100px;
+  background: radial-gradient(circle, rgba(129,140,248,0.10) 0%, transparent 70%);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+/* ── Glass card ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: box-shadow var(--transition), background var(--transition);
+}
+.card:hover { box-shadow: var(--shadow-lg); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+/* ── Recharts tooltip override ── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow) !important;
+  backdrop-filter: blur(12px);
+}
+.recharts-tooltip-item { color: var(--text-h) !important; }
+.recharts-cartesian-axis-tick-value { fill: var(--text-muted); font-size: 12px; }
+
+/* ── Leaflet overrides ── */
+.leaflet-container {
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.leaflet-control-attribution { display: none; }
+
+/* ── Swiper overrides ── */
+.swiper { padding: 4px 0 8px !important; }
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.fade-up { animation: fadeUp 0.45s cubic-bezier(.4,0,.2,1) both; }
+.fade-up-1 { animation-delay: 0.05s; }
+.fade-up-2 { animation-delay: 0.12s; }
+.fade-up-3 { animation-delay: 0.20s; }
+.fade-up-4 { animation-delay: 0.28s; }
+.fade-up-5 { animation-delay: 0.36s; }
